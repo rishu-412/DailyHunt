@@ -2,7 +2,7 @@ package com.moengage.dailyhunt.core
 
 import android.app.Application
 import android.util.Log
-import com.moengage.dailyhunt.notification.createNotificationChannels
+import com.moengage.dailyhunt.utils.createNotificationChannels
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -1,4 +1,4 @@
-package com.moengage.dailyhunt.ui.utils
+package com.moengage.dailyhunt.utils
 
 import android.util.Log
 import java.text.DateFormat
@@ -10,11 +10,9 @@ private const val TAG = "DateTimeUtils"
 
 fun getFormattedNewsArticleTime(timeString: String): String {
     try {
-        val tz: TimeZone = TimeZone.getTimeZone("UTC")
         val iSODateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
-        iSODateFormat.timeZone = tz
         val date = iSODateFormat.parse(timeString) ?: return ""
-        return DateFormat.getDateInstance(DateFormat.MONTH_FIELD).format(date)
+        return DateFormat.getDateInstance(DateFormat.LONG).format(date)
     } catch (t: Throwable) {
         Log.i(TAG, "getFormattedNewsArticleTime(): ", t)
         return ""

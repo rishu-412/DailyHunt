@@ -5,7 +5,7 @@ import android.util.Log
 import com.moengage.dailyhunt.core.data.model.NetworkResponse
 import com.moengage.dailyhunt.core.data.model.NewsArticle
 import com.moengage.dailyhunt.core.data.model.NewsSource
-import com.moengage.dailyhunt.core.hasInternetConnection
+import com.moengage.dailyhunt.utils.hasInternetConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray

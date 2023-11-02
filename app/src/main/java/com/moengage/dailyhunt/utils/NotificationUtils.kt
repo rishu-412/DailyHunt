@@ -1,4 +1,4 @@
-package com.moengage.dailyhunt.notification
+package com.moengage.dailyhunt.utils
 
 import android.Manifest
 import android.app.Notification
@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import com.moengage.dailyhunt.R
 import com.moengage.dailyhunt.ui.activities.MainActivity
-import com.moengage.dailyhunt.ui.utils.getSystemTimeSeconds
 import org.json.JSONObject
 
 private const val TAG = "NotificationUtils"

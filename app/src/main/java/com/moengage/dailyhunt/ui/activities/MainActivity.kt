@@ -5,11 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.moengage.dailyhunt.R
 import com.moengage.dailyhunt.core.data.model.NewsArticle
+import com.moengage.dailyhunt.core.data.model.SortOrder
 import com.moengage.dailyhunt.databinding.ActivityMainBinding
 import com.moengage.dailyhunt.ui.recycler.NewsArticleRecyclerAdapter
 import com.moengage.dailyhunt.ui.viewmodel.MainActivityViewModel
@@ -33,17 +36,7 @@ class MainActivity : AppCompatActivity(), NewsArticleRecyclerAdapter.NewsArticle
         parseIncomingData(intent)
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         viewModel.getNewsArticles().observe(this) { newsArticles ->
-            with(viewBinding) {
-                with(newsRecycler) {
-                    layoutManager =
-                        LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-                    adapter = NewsArticleRecyclerAdapter(
-                        newsArticles, this@MainActivity
-                    )
-                }
-                progressBar.visibility = View.GONE
-                newsRecycler.visibility = View.VISIBLE
-            }
+            showArticles(newsArticles)
         }
     }
 
@@ -96,6 +89,40 @@ class MainActivity : AppCompatActivity(), NewsArticleRecyclerAdapter.NewsArticle
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         parseIncomingData(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
+        menu[0].setOnMenuItemClickListener {
+            showProgressBar()
+            viewModel.getSortedArticles(SortOrder.DESCENDING).observe(this) { articles ->
+                showArticles(articles)
+            }
+            return@setOnMenuItemClickListener true
+        }
+        menu[1].setOnMenuItemClickListener {
+            showProgressBar()
+            viewModel.getSortedArticles(SortOrder.ASCENDING).observe(this) { articles ->
+                showArticles(articles)
+            }
+            return@setOnMenuItemClickListener true
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun showProgressBar() {
+        viewBinding.progressBar.visibility = View.VISIBLE
+        viewBinding.newsRecycler.visibility = View.GONE
+    }
+
+    private fun showArticles(articles: List<NewsArticle>) {
+        with(viewBinding) {
+            newsRecycler.adapter = NewsArticleRecyclerAdapter(
+                articles, this@MainActivity
+            )
+            progressBar.visibility = View.GONE
+            newsRecycler.visibility = View.VISIBLE
+        }
     }
 
     companion object {

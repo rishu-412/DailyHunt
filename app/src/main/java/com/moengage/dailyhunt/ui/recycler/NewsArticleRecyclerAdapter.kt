@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.moengage.dailyhunt.R
 import com.moengage.dailyhunt.core.data.model.NewsArticle
 import com.moengage.dailyhunt.databinding.LayoutNewsArticleItemBinding
-import com.moengage.dailyhunt.ui.utils.getFormattedNewsArticleTime
+import com.moengage.dailyhunt.utils.getFormattedNewsArticleTime
 
 class NewsArticleRecyclerAdapter(
     private val newsArticles: List<NewsArticle>, private val listener: NewsArticleRecyclerListener

@@ -1,4 +1,4 @@
-package com.moengage.dailyhunt.core
+package com.moengage.dailyhunt.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
