@@ -9,13 +9,23 @@ import com.moengage.dailyhunt.core.data.model.NewsArticle
 import com.moengage.dailyhunt.databinding.LayoutNewsArticleItemBinding
 import com.moengage.dailyhunt.utils.getFormattedNewsArticleTime
 
-class NewsArticleRecyclerAdapter(
-    private val newsArticles: List<NewsArticle>, private val listener: NewsArticleRecyclerListener
-) : RecyclerView.Adapter<NewsArticleRecyclerAdapter.ViewHolder>() {
+/**
+ * Functional Interface to handle the clicks on News Articls
+ *
+ */
+fun interface OnNewsArticleClickedListener {
+    fun onClick(position: Int, article: NewsArticle)
+}
 
-    interface NewsArticleRecyclerListener {
-        fun onClickRead(position: Int, article: NewsArticle)
-    }
+/**
+ * RecyclerView Adapter for News Articles
+ *
+ * @property newsArticles [List] of [NewsArticle]
+ * @property listener instance of [OnNewsArticleClickedListener]
+ */
+class NewsArticleRecyclerAdapter(
+    private val newsArticles: List<NewsArticle>, private val listener: OnNewsArticleClickedListener
+) : RecyclerView.Adapter<NewsArticleRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -36,7 +46,7 @@ class NewsArticleRecyclerAdapter(
     inner class ViewHolder(private val viewBinding: LayoutNewsArticleItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
-        fun bind(article: NewsArticle, listener: NewsArticleRecyclerListener) {
+        fun bind(article: NewsArticle, listener: OnNewsArticleClickedListener) {
             with(viewBinding) {
                 newsTitle.text = article.title
                 newsDescription.text = article.description
@@ -46,10 +56,10 @@ class NewsArticleRecyclerAdapter(
                     .placeholder(R.drawable.placeholder_no_image_found)
                     .into(newsImage)
                 newsRead.setOnClickListener {
-                    listener.onClickRead(absoluteAdapterPosition, article)
+                    listener.onClick(absoluteAdapterPosition, article)
                 }
                 root.setOnClickListener {
-                    listener.onClickRead(absoluteAdapterPosition, article)
+                    listener.onClick(absoluteAdapterPosition, article)
                 }
             }
         }

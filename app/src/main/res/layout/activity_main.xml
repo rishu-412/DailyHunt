@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/white">
 
   <ProgressBar
       android:id="@+id/progress_bar"
@@ -24,6 +25,7 @@
       tools:itemCount="5"
       tools:listitem="@layout/layout_news_article_item"
       android:paddingHorizontal="8dp"
-      android:visibility="invisible"/>
+      android:visibility="invisible"
+      android:backgroundTint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

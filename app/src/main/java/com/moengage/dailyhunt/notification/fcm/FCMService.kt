@@ -3,7 +3,6 @@ package com.moengage.dailyhunt.notification.fcm
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.moengage.dailyhunt.utils.createNotification
 
 /**
  * FCM Service to handle push messages
@@ -19,7 +18,7 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        createNotification(applicationContext, message.data)
+        NotificationHandler.createNotification(applicationContext, message.data)
     }
 
 }

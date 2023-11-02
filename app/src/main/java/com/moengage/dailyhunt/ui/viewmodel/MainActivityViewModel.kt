@@ -6,12 +6,14 @@ import androidx.lifecycle.liveData
 import com.moengage.dailyhunt.core.data.model.NewsArticle
 import com.moengage.dailyhunt.core.data.model.SortOrder
 import com.moengage.dailyhunt.core.data.repository.NewsRepository
+import com.moengage.dailyhunt.core.data.repository.PrefRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(private val newsRepository: NewsRepository) :
-    ViewModel() {
+class MainActivityViewModel @Inject constructor(
+    private val newsRepository: NewsRepository, private val prefRepository: PrefRepository
+) : ViewModel() {
 
     fun getNewsArticles(): LiveData<List<NewsArticle>> {
         return liveData {
@@ -31,5 +33,13 @@ class MainActivityViewModel @Inject constructor(private val newsRepository: News
                 }
             }
         }
+    }
+
+    fun getNotificationRequestCount(): Int {
+        return prefRepository.getNotificationRequestCount()
+    }
+
+    fun updateNotificationRequestCount() {
+        prefRepository.incrementNotificationRequestCount()
     }
 }
