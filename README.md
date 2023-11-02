@@ -19,8 +19,7 @@ A Pseudo-Mobile App that displays and open best-outlinked news articles from the
     "notification": {
         "image": "https://picsum.photos/400/200",
         "title": "RIP Chandler Bing",
-        "body": "Tap to read more...",
-        "click_action": "com.moengage.dailyhunt.ui.activities.MainActivity"
+        "body": "Tap to read more..."
     },
     "data": {
         "news_description": "Tap to read more...",
