@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -62,6 +63,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
 
+    implementation("com.google.firebase:firebase-messaging-ktx:23.3.1")
 
     //Android Testing Libraries
     testImplementation("junit:junit:4.13.2")

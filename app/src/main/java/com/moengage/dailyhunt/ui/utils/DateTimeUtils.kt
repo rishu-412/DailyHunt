@@ -20,3 +20,7 @@ fun getFormattedNewsArticleTime(timeString: String): String {
         return ""
     }
 }
+
+fun getSystemTimeSeconds(): Int {
+    return (System.currentTimeMillis() / 1000).toInt()
+}

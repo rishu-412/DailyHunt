@@ -2,4 +2,6 @@
   <string name="app_name">DailyHunt</string>
   <string name="news_article_image">News Article Image</string>
   <string name="read">Read</string>
+  <string name="channel_name">news_article</string>
+  <string name="channel_description">Updates for news articles</string>
 </resources>

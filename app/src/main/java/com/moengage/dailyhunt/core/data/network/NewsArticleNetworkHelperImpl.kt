@@ -22,20 +22,20 @@ private const val REQUEST_METHOD = "GET"
 private const val BUFFER_SIZE = 1024
 
 //ROOT PAYLOAD
-private const val KEY_ARTICLES = "articles"
-private const val KEY_STATUS = "status"
+private const val ATTRIBUTE_ARTICLES = "articles"
+private const val ATTRIBUTE_STATUS = "status"
 
 //NEWS ARTICLE PAYLOAD
-private const val KEY_AUTHOR = "author"
-private const val KEY_TITLE = "title"
-private const val KEY_DESCRIPTION = "description"
-private const val KEY_URL = "url"
-private const val KEY_IMAGE_URL = "urlToImage"
-private const val KEY_PUBLISHED_AT = "publishedAt"
-private const val KEY_CONTENT = "content"
-private const val KEY_SOURCE = "source"
-private const val KEY_SOURCE_ID = "id"
-private const val KEY_SOURCE_NAME = "name"
+private const val ATTRIBUTE_AUTHOR = "author"
+private const val ATTRIBUTE_TITLE = "title"
+private const val ATTRIBUTE_DESCRIPTION = "description"
+private const val ATTRIBUTE_URL = "url"
+private const val ATTRIBUTE_IMAGE_URL = "urlToImage"
+private const val ATTRIBUTE_PUBLISHED_AT = "publishedAt"
+private const val ATTRIBUTE_CONTENT = "content"
+private const val ATTRIBUTE_SOURCE = "source"
+private const val ATTRIBUTE_SOURCE_ID = "id"
+private const val ATTRIBUTE_SOURCE_NAME = "name"
 
 /**
  *  Contains the implementation News Article Network Helper
@@ -94,7 +94,6 @@ class NewsArticleNetworkHelperImpl(private val applicationContext: Context) :
             while (-1 != inputStream.read(buffer).also { length = it }) {
                 outputStream.write(buffer, 0, length)
             }
-
             JSONObject(String(outputStream.toByteArray()))
         } catch (t: Throwable) {
             Log.e(tag, "getNewsArticles: ", t)
@@ -113,7 +112,8 @@ class NewsArticleNetworkHelperImpl(private val applicationContext: Context) :
      */
     private fun parseNetworkResponse(payload: JSONObject): NetworkResponse<List<NewsArticle>> {
         return NetworkResponse(
-            payload.getString(KEY_STATUS), parseNewsArticles(payload.getJSONArray(KEY_ARTICLES))
+            payload.getString(ATTRIBUTE_STATUS),
+            parseNewsArticles(payload.getJSONArray(ATTRIBUTE_ARTICLES))
         )
     }
 
@@ -139,14 +139,14 @@ class NewsArticleNetworkHelperImpl(private val applicationContext: Context) :
      */
     private fun parseNewsArticle(newsArticlePayload: JSONObject): NewsArticle {
         return NewsArticle(
-            authorName = newsArticlePayload.getString(KEY_AUTHOR),
-            title = newsArticlePayload.getString(KEY_TITLE),
-            description = newsArticlePayload.getString(KEY_DESCRIPTION),
-            url = newsArticlePayload.getString(KEY_URL),
-            imageUrl = newsArticlePayload.getString(KEY_IMAGE_URL),
-            publishedAt = newsArticlePayload.getString(KEY_PUBLISHED_AT),
-            content = newsArticlePayload.getString(KEY_CONTENT),
-            newsSource = parseSource(newsArticlePayload.getJSONObject(KEY_SOURCE))
+            authorName = newsArticlePayload.getString(ATTRIBUTE_AUTHOR),
+            title = newsArticlePayload.getString(ATTRIBUTE_TITLE),
+            description = newsArticlePayload.getString(ATTRIBUTE_DESCRIPTION),
+            url = newsArticlePayload.getString(ATTRIBUTE_URL),
+            imageUrl = newsArticlePayload.getString(ATTRIBUTE_IMAGE_URL),
+            publishedAt = newsArticlePayload.getString(ATTRIBUTE_PUBLISHED_AT),
+            content = newsArticlePayload.getString(ATTRIBUTE_CONTENT),
+            newsSource = parseSource(newsArticlePayload.getJSONObject(ATTRIBUTE_SOURCE))
         )
     }
 
@@ -158,8 +158,8 @@ class NewsArticleNetworkHelperImpl(private val applicationContext: Context) :
      */
     private fun parseSource(sourcePayload: JSONObject): NewsSource {
         return NewsSource(
-            id = sourcePayload.getString(KEY_SOURCE_ID),
-            name = sourcePayload.getString(KEY_SOURCE_NAME)
+            id = sourcePayload.getString(ATTRIBUTE_SOURCE_ID),
+            name = sourcePayload.getString(ATTRIBUTE_SOURCE_NAME)
         )
     }
 

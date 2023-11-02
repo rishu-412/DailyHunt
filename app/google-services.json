@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431189368820",
+    "project_id": "dailyhunt-b2cce",
+    "storage_bucket": "dailyhunt-b2cce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431189368820:android:ea63d27b375d31472d63a1",
+        "android_client_info": {
+          "package_name": "com.moengage.dailyhunt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYDd9mu_ttXRvipagEzJDPfmamm1rac1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
